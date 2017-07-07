@@ -110,7 +110,7 @@ void ofxLSTubeDeformed::calcNormals(ofMesh& mesh){
     }
     //normalizzo tutti i vettori che definiscono i normals
     for(int i=0; i < mesh.getNormals().size(); i++ ) {
-        mesh.getNormals()[i].normalize();
+        glm::normalize(mesh.getNormals()[i]);
     }
 }
 

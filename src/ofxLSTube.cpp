@@ -81,7 +81,7 @@ void ofxLSTube::generate(ofMesh& mesh, const ofxLSBranch branch, const float len
     // Cylinder cap
     if (cap) {
         int topMiddlePoint = mesh.getNumVertices();
-        ofVec3f topDir = branch.end.getPosition().getNormalized();
+        ofVec3f topDir = glm::normalize(branch.end.getPosition());
         mesh.addVertex(branch.end.getGlobalPosition());
         mesh.addNormal(topDir * endMatrix.getRotate());
         mesh.addTexCoord(ofVec2f(wrapLimitCap/2,wrapLimitCap/2));
