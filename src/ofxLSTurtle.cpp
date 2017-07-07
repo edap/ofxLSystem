@@ -35,46 +35,46 @@ void ofxLSTurtle::generate(ofVboMesh& mesh, const string _instruction, const int
         }else if (head == "+") {
             shared_ptr<ofNode> newJoin(new ofNode);
             newJoin->setParent(*branchContainer.back());
-            newJoin->roll(+inst.getAngle(theta));
+            newJoin->rollDeg(+inst.getAngle(theta));
             if(randomYRotation){
-                newJoin->pan(ofRandom(30.00, 330.00));
+                newJoin->panDeg(ofRandom(30.00, 330.00));
             }
             branchContainer.push_back(newJoin);
         }else if (head == "-") {
             shared_ptr<ofNode> newJoin(new ofNode);
             newJoin->setParent(*branchContainer.back());
-            newJoin->roll(-inst.getAngle(theta));
+            newJoin->rollDeg(-inst.getAngle(theta));
             if(randomYRotation){
-                newJoin->pan(ofRandom(30.00, 330.00));
+                newJoin->panDeg(ofRandom(30.00, 330.00));
             }
             branchContainer.push_back(newJoin);
         }else if (head == "|") {
             shared_ptr<ofNode> newJoin(new ofNode);
             newJoin->setParent(*branchContainer.back());
-            newJoin->pan(+inst.getAngle(180.00));
+            newJoin->panDeg(+inst.getAngle(180.00));
             branchContainer.push_back(newJoin);
         }else if (head == "&") {
             shared_ptr<ofNode> newJoin(new ofNode);
             newJoin->setParent(*branchContainer.back());
-            newJoin->tilt(+inst.getAngle(theta));
+            newJoin->tiltDeg(+inst.getAngle(theta));
             branchContainer.push_back(newJoin);
         }
         else if (head == "^") {
             shared_ptr<ofNode> newJoin(new ofNode);
             newJoin->setParent(*branchContainer.back());
-            newJoin->tilt(-inst.getAngle(theta));
+            newJoin->tiltDeg(-inst.getAngle(theta));
             branchContainer.push_back(newJoin);
         }
         else if (head == "\\") {
             shared_ptr<ofNode> newJoin(new ofNode);
             newJoin->setParent(*branchContainer.back());
-            newJoin->pan(+inst.getAngle(theta));
+            newJoin->panDeg(+inst.getAngle(theta));
             branchContainer.push_back(newJoin);
         }
         else if (head == "/") {
             shared_ptr<ofNode> newJoin(new ofNode);
             newJoin->setParent(*branchContainer.back());
-            newJoin->pan(-inst.getAngle(180.00));
+            newJoin->panDeg(-inst.getAngle(180.00));
             branchContainer.push_back(newJoin);
         }
         else if (head == "[") {
