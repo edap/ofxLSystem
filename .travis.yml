@@ -194,6 +194,7 @@ install:
   - git clone --depth=1  --branch=master https://github.com/edap/ofxLSystemGrammar addons/ofxLSystemGrammar
   - git clone --depth=1  --branch=master https://github.com/micknoise/Maximilian Maximilian
   - mv Maximilian/openFrameworks/ofxMaxim addons/ofMaxim
+  - ls addons/
 
 script:
   - scripts/ci/addons/build.sh
