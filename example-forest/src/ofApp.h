@@ -24,7 +24,7 @@ public:
     void saveMesh();
 
     ofMesh forest;
-    int nTree = 1;
+    int nTree = 30;
     ofLight light;
     ofEasyCam cam;
     ofPlanePrimitive plane;

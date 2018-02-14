@@ -34,8 +34,6 @@ build-example-rings-Desktop-Debug/
 example-rings/bin/example-rings_debug
 example-rings/bin/data/*.ply
 
-
-
-
+*qbs.user
 
 
