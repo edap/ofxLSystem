@@ -31,6 +31,8 @@ install:
 - cd ..
 - git clone --depth=1 --branch=master https://github.com/openframeworks/openFrameworks
 - git clone --depth=1 --branch=master https://github.com/edap/ofxLSystemGrammar
+- git clone --depth=1  --branch=master https://github.com/micknoise/Maximilian Maximilian
+- mv Maximilian/openFrameworks/ofxMaxim addons/ofMaxim
 - call openFrameworks\scripts\ci\addons\install.cmd
 
 build_script:
