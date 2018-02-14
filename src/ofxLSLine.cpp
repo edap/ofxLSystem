@@ -10,10 +10,10 @@ void ofxLSLine::generate(ofMesh& mesh, ofxLSBranch branch){
     auto numberCurrentVertices = mesh.getNumVertices();
     
     mesh.addVertex(start);
-    mesh.addNormal(start.getNormalized());
+    mesh.addNormal(glm::normalize(start));
     
     mesh.addVertex(end);
-    mesh.addNormal(end.getNormalized());
+    mesh.addNormal(glm::normalize(end));
     
     mesh.addIndex(numberCurrentVertices);
     mesh.addIndex(numberCurrentVertices+1);
