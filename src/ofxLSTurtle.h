@@ -16,7 +16,7 @@ public:
     BoundingBox getBuildedBoundingBox() const { return buildedBoundingBox; };
 
 private:
-    const ofVec3f     origin = ofVec3f(0,0,0);
+    const glm::vec3     origin = glm::vec3(0.,0.,0.);
     float   defaultLength = 100;
     float   width;
     float   theta;
@@ -26,7 +26,6 @@ private:
     bool    scaleWidth = false;
     int     resolution = 4;
     int     textureRepeat;
-    ofVec3f position; // it can be removed?
     vector<string> getInstructionsFromString(string sentence);
     void maybeVectorExpandsBoundingBox(ofVec3f v);
 

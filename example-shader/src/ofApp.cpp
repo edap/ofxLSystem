@@ -71,7 +71,7 @@ void ofApp::draw(){
     shader.setUniform1f("uThickness", thickness);
     shader.setUniform1f("uScale", scale);
     shader.setUniform2f("mouse", mouseX - ofGetWidth()/2, ofGetHeight()/2-mouseY );
-    shader.setUniform3f("uLightPosition", lightPos);
+    shader.setUniform3f("uLightPosition", lightPos.get());
     shader.setUniform4f("uMaterialColor", ofColor(materialColor));
     shader.setUniform2f("uResolution", uResolution );
     shader.setUniform2f("uTreeResolution", uTreeResolution );
