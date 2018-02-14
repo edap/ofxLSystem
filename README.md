@@ -108,4 +108,3 @@ Generates a tree like this:
 - *example-gui* contains ~10 differents L-Systems, with a GUI to change colors, rotation angle, n steps ecc. It saves the settings for each tree on a separate xml file
 - *example-forest* An example on how you can build a forest merging the meshes of 60 trees in one  
 - *example-shader* I've added some simple shaders following "the book of shader" of Patricio Gonzalo Vivo.
-- *example-rings* A shader draw rings of light on the surface of the trees, these rings are animated by some music (if requires ofxMaxim as dependency)

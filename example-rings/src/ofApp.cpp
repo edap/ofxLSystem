@@ -33,8 +33,8 @@ void ofApp::setup(){
 
         tree.setPosition(ofVec3f(pos.x, 0, pos.y));
         for (int i=0; i<tree.getMesh().getNumVertices(); i++) {
-            auto actualVert =tree.getMesh().getVerticesPointer()[i];
-            auto newVert = actualVert * tree.getGlobalTransformMatrix();
+            ofVec3f actualVert =tree.getMesh().getVerticesPointer()[i];
+            ofVec3f newVert = actualVert * tree.getGlobalTransformMatrix();
             tree.getMesh().getVerticesPointer()[i] = newVert;
         }
         forest.append(tree.getMesh());
@@ -89,7 +89,7 @@ void ofApp::draw(){
     shader.setUniform1f("uScale", scale);
     shader.setUniform1f("uThreshold", threshold);
     shader.setUniform1f("uNRing", uNRing);
-    shader.setUniform3f("uLightPosition", lightPos);
+    shader.setUniform3f("uLightPosition", lightPos.get());
     shader.setUniform4f("uMaterialColor", ofColor(materialColor));
     shader.setUniform4f("uRingColor", ofColor(ringColor));
     shader.setUniform4f("uRingColor", ofColor(ringColor));
@@ -181,55 +181,7 @@ void ofApp::keyPressed(int key){
     }
 }
 
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
 
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-    
-}
 
 void ofApp::saveMeshPressed(){
     string randomFilename = ofGetTimestampString() + ".ply";
