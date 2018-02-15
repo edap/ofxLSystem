@@ -19,7 +19,7 @@ This addon can be used to generate meshes as the following ones:
 
 It is currently tested on mac, linux and windows and the current version of openFrameworks in master
 
-*note about linux*On linux, you need g++ > 4.9 and the `-std=gnu++14` flag. Otherwise you will have an error about `std::regex_iterator`. This flag is the default since OF 0.9.3, just in case you set it to `std=c++11` as described in this [post]( https://forum.openframeworks.cc/t/openframeworks-0-9-qtcreator/21312/7).
+On linux, you need g++ > 4.9 and the `-std=gnu++14` flag. Otherwise you will have an error about `std::regex_iterator`. This flag is the default since OF 0.9.3, just in case you set it to `std=c++11` as described in this [post]( https://forum.openframeworks.cc/t/openframeworks-0-9-qtcreator/21312/7).
 
 ## Usage
 
