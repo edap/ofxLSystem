@@ -12,9 +12,9 @@ void ofxLSGeometry::putIntoMesh(const ofxLSBranch branch, ofVboMesh& mesh,ofxLSG
 //        case TUBES_DEFORMED:
 //            tubeDeformed.generate(mesh, branch, width);
 //            break;
-//        case LINES:
-//            tubeDeformed.generate(mesh, branch, width);
-//            break;
+        case LINES:
+            line.generate(mesh, branch);
+            break;
         case TRIANGLES:
             triangle.setResolution(resolution);
             triangle.generate(mesh, branch, length);

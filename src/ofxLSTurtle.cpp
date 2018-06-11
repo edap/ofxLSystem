@@ -10,11 +10,11 @@ void ofxLSTurtle::setup( float _moveLength, float _width, float _turnAngle, ofxL
     randomYRotation = _randomYRotation;
     scaleWidth = _scaleWidth;
     bookmarks.clear();
-    branchContainer.clear();
+    nodesContainer.clear();
     historySizes.clear();
     shared_ptr<ofNode> root(new ofNode);
     root->setPosition(origin);
-    branchContainer.push_back(root);
+    nodesContainer.push_back(root);
 }
 
 void ofxLSTurtle::generate(ofVboMesh& mesh, const string _instruction, const int _depth) {
@@ -29,75 +29,82 @@ void ofxLSTurtle::generate(ofVboMesh& mesh, const string _instruction, const int
             branching =  true;
         }else if( head == "G") {
             shared_ptr<ofNode> newJoin(new ofNode);
-            newJoin->setParent(*branchContainer.back());
+            newJoin->setParent(*nodesContainer.back());
             newJoin->boom(inst.getLength(defaultLength));
-            branchContainer.push_back(newJoin);
+            nodesContainer.push_back(newJoin);
         }else if (head == "+") {
             shared_ptr<ofNode> newJoin(new ofNode);
-            newJoin->setParent(*branchContainer.back());
+            newJoin->setParent(*nodesContainer.back());
             newJoin->rollDeg(+inst.getAngle(theta));
             if(randomYRotation){
                 newJoin->panDeg(ofRandom(30.00, 330.00));
             }
-            branchContainer.push_back(newJoin);
+            nodesContainer.push_back(newJoin);
         }else if (head == "-") {
             shared_ptr<ofNode> newJoin(new ofNode);
-            newJoin->setParent(*branchContainer.back());
+            newJoin->setParent(*nodesContainer.back());
             newJoin->rollDeg(-inst.getAngle(theta));
             if(randomYRotation){
                 newJoin->panDeg(ofRandom(30.00, 330.00));
             }
-            branchContainer.push_back(newJoin);
+            nodesContainer.push_back(newJoin);
         }else if (head == "|") {
             shared_ptr<ofNode> newJoin(new ofNode);
-            newJoin->setParent(*branchContainer.back());
+            newJoin->setParent(*nodesContainer.back());
             newJoin->panDeg(+inst.getAngle(180.00));
-            branchContainer.push_back(newJoin);
+            nodesContainer.push_back(newJoin);
         }else if (head == "&") {
             shared_ptr<ofNode> newJoin(new ofNode);
-            newJoin->setParent(*branchContainer.back());
+            newJoin->setParent(*nodesContainer.back());
             newJoin->tiltDeg(+inst.getAngle(theta));
-            branchContainer.push_back(newJoin);
+            nodesContainer.push_back(newJoin);
         }
         else if (head == "^") {
             shared_ptr<ofNode> newJoin(new ofNode);
-            newJoin->setParent(*branchContainer.back());
+            newJoin->setParent(*nodesContainer.back());
             newJoin->tiltDeg(-inst.getAngle(theta));
-            branchContainer.push_back(newJoin);
+            nodesContainer.push_back(newJoin);
         }
         else if (head == "\\") {
             shared_ptr<ofNode> newJoin(new ofNode);
-            newJoin->setParent(*branchContainer.back());
+            newJoin->setParent(*nodesContainer.back());
             newJoin->panDeg(+inst.getAngle(theta));
-            branchContainer.push_back(newJoin);
+            nodesContainer.push_back(newJoin);
         }
         else if (head == "/") {
             shared_ptr<ofNode> newJoin(new ofNode);
-            newJoin->setParent(*branchContainer.back());
+            newJoin->setParent(*nodesContainer.back());
             newJoin->panDeg(-inst.getAngle(180.00));
-            branchContainer.push_back(newJoin);
+            nodesContainer.push_back(newJoin);
         }
         else if (head == "[") {
-            bookmarks.push_back(branchContainer.back());
+            bookmarks.push_back(nodesContainer.back());
         }
         else if (head == "]") {
-            branchContainer.push_back(bookmarks.back());
+            nodesContainer.push_back(bookmarks.back());
             bookmarks.pop_back();
         }
 
         if (branching) {
             float length = inst.getLength(defaultLength);
-            auto beginBranch = branchContainer.back();
+            auto beginBranch = nodesContainer.back();
             shared_ptr<ofNode> endBranch(new ofNode);
-            endBranch->setParent(*branchContainer.back());
+            endBranch->setParent(*nodesContainer.back());
             endBranch->move(ofVec3f(0, length, 0));
 
             maybeVectorExpandsBoundingBox(endBranch->getGlobalPosition());
 
             auto widths = getPrevAndCurrentWidth(length);
             auto newBranch = ofxLSBranch(*beginBranch, *endBranch, widths);
-            geometryBuilder.putIntoMesh(newBranch, mesh, geometry, resolution, length, textureRepeat);
-            branchContainer.push_back(endBranch);
+            nodesContainer.push_back(endBranch);
+
+            // L-Systems are recursive, to avoid to insert the same mesh multiple
+            // times, we check if a branch is not already in
+            if (!branchAlreadySaved(newBranch)) {
+                geometryBuilder.putIntoMesh(newBranch, mesh, geometry, resolution, length, textureRepeat);
+                branchContainer.push_back(newBranch);
+            }
+
             branching = false;
         }
     }
@@ -119,10 +126,22 @@ void ofxLSTurtle::generate(ofVboMesh& mesh, const string _instruction, const int
 //        }
 //
 //    }
-    branchContainer.clear();
+
+    nodesContainer.clear();
     bookmarks.clear();
     historySizes.clear();
+    branchContainer.clear();
 }
+
+bool ofxLSTurtle::branchAlreadySaved(ofxLSBranch newBranch){
+    for (auto savedBranch:branchContainer) {
+        if(newBranch.begin.getGlobalPosition() == savedBranch.begin.getGlobalPosition() &&
+           newBranch.end.getGlobalPosition() == savedBranch.end.getGlobalPosition()){
+            return true;
+        }
+    }
+    return false;
+};
 
 // In case there is the need to keep track of the differents branches width and lenght,
 // as in the case when scaleWidth is set to true, this method does 2 things:

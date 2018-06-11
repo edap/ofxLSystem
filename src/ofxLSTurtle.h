@@ -31,13 +31,14 @@ private:
 
     ofxLSGeometry                    geometryBuilder;
     std::vector<shared_ptr<ofNode> > bookmarks;
-    std::vector<shared_ptr<ofNode> > branchContainer;
-    //std::vector<shared_ptr<ofxLSBranch> > rBranchContainer;
+    std::vector<shared_ptr<ofNode> > nodesContainer;
+    std::vector<ofxLSBranch> branchContainer;
 
     map<float, float> historySizes;
     pair<float, float> getPrevAndCurrentWidth(float currentLength);
     float getScaledWidth(float currentLength);
 
     void resetBoundingBox();
+    bool branchAlreadySaved(ofxLSBranch branch);
     BoundingBox buildedBoundingBox;
 };

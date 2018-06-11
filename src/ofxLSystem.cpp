@@ -52,18 +52,23 @@ void ofxLSystem::setMeshMode(ofxLSGeometryAvailable _geometry){
     switch (_geometry) {
         case LINES:
             mesh.setMode(OF_PRIMITIVE_LINES);
+            getMesh().setMode(OF_PRIMITIVE_LINES);
             break;
         case TUBES:
             mesh.setMode(OF_PRIMITIVE_TRIANGLES);
+            getMesh().setMode(OF_PRIMITIVE_TRIANGLES);
             break;
         case TUBES_DEFORMED:
             mesh.setMode(OF_PRIMITIVE_TRIANGLES);
+            getMesh().setMode(OF_PRIMITIVE_TRIANGLES);
             break;
         case TRIANGLES:
             mesh.setMode(OF_PRIMITIVE_TRIANGLES);
+            getMesh().setMode(OF_PRIMITIVE_TRIANGLES);
             break;
         default:
             mesh.setMode(OF_PRIMITIVE_TRIANGLES);
+            getMesh().setMode(OF_PRIMITIVE_TRIANGLES);
             break;
     }
 }
