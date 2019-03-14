@@ -56,9 +56,9 @@ private:
     ofParameter<bool>   randomYRotation;
     unsigned int oldDepth = 1;
     ofParameter<float>  selectedTheta;
-    ofxColorSlider bgColor;
-    ofxColorSlider treeColor;
-    ofxColorSlider specularColor;
+    ofParameter<ofColor> bgColor;
+    ofParameter<ofColor> treeColor;
+    ofParameter<ofColor> specularColor;
     ofxButton saveMesh;
 
     vector<string> fileNames;

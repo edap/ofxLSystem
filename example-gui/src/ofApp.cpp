@@ -19,9 +19,9 @@ void ofApp::setup(){
     gui.add(definedConstant.set("constants", ""));
     gui.add(selectedDepth.set("depth", 2, 1, 9));
     gui.add(selectedTheta.set("theta", 25.00, 0.00, 45.00));
-    gui.add(bgColor.setup("bg color", ofColor(100, 100, 140), ofColor(0, 0), ofColor(255, 255)));
-    gui.add(treeColor.setup("tree color", ofColor(255, 0, 0), ofColor(0, 0), ofColor(255, 255)));
-    gui.add(specularColor.setup("specular color", ofColor(255, 255, 0), ofColor(0, 0), ofColor(255, 255)));
+    gui.add(bgColor.set("bg color", ofColor(100, 100, 140), ofColor(0, 0), ofColor(255, 255)));
+    gui.add(treeColor.set("tree color", ofColor(255, 0, 0), ofColor(0, 0), ofColor(255, 255)));
+    gui.add(specularColor.set("specular color", ofColor(255, 255, 0), ofColor(0, 0), ofColor(255, 255)));
     gui.add(saveMesh.setup("save mesh"));
     ofSetVerticalSync(true);
     oldDepth = selectedDepth;
